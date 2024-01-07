@@ -1172,10 +1172,8 @@ minetest.register_node(BASENAME .. "_burnt", {
 ------------------------
 
 minetest.register_craft({
-	output = BASENAME.."0000 2",
+	output = BASENAME.."0000",
 	recipe = {
-		{'mesecons_materials:silicon', 'mesecons_materials:silicon', 'group:mesecon_conductor_craftable'},
-		{'mesecons_materials:silicon', 'default:gold_ingot', 'group:mesecon_conductor_craftable'},
-		{'group:mesecon_conductor_craftable', 'group:mesecon_conductor_craftable', ''},
+		{'mesecons_luacontroller:luacontroller0000', 'default:gold_ingot'},
 	}
 })
