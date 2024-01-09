@@ -228,16 +228,16 @@ local function update_formspec(pos)
 
 	--Default theme settings
 	local textcolor = "#ffffff"
-	local bg_img = "jeija_luac_background.png"
-	local run_img = "jeija_luac_runbutton.png"
-	local close_img = "jeija_close_window.png"
+	local bg_img = "mesecons_luacontroller_term_luac_background.png"
+	local run_img = "mesecons_luacontroller_term_luac_runbutton.png"
+	local close_img = "mesecons_luacontroller_term_close_window.png"
 
 	--If Dreambuilder's theming engine is in use, then override those
 	if minetest.global_exists("dreambuilder_theme") then
 		textcolor = dreambuilder_theme.editor_text_color
-		bg_img = dreambuilder_theme.name.."_jeija_luac_background.png"
-		run_img = dreambuilder_theme.name.."_jeija_luac_runbutton.png"
-		close_img = dreambuilder_theme.name.."_jeija_close_window.png"
+		bg_img = dreambuilder_theme.name.."_mesecons_luacontroller_term_luac_background.png"
+		run_img = dreambuilder_theme.name.."_mesecons_luacontroller_term_luac_runbutton.png"
+		close_img = dreambuilder_theme.name.."_mesecons_luacontroller_term_close_window.png"
 	end
 
 	local fs = "formspec_version[4]"
@@ -1033,18 +1033,18 @@ for c = 0, 1 do
 for d = 0, 1 do
 	local cid = tostring(d)..tostring(c)..tostring(b)..tostring(a)
 	local node_name = BASENAME..cid
-	local top = "jeija_luacontroller_top.png"
+	local top = "mesecons_luacontroller_term_luacontroller_top.png"
 	if a == 1 then
-		top = top.."^jeija_luacontroller_LED_A.png"
+		top = top.."^mesecons_luacontroller_term_luacontroller_LED_A.png"
 	end
 	if b == 1 then
-		top = top.."^jeija_luacontroller_LED_B.png"
+		top = top.."^mesecons_luacontroller_term_luacontroller_LED_B.png"
 	end
 	if c == 1 then
-		top = top.."^jeija_luacontroller_LED_C.png"
+		top = top.."^mesecons_luacontroller_term_luacontroller_LED_C.png"
 	end
 	if d == 1 then
-		top = top.."^jeija_luacontroller_LED_D.png"
+		top = top.."^mesecons_luacontroller_term_luacontroller_LED_D.png"
 	end
 
 	local groups
@@ -1089,11 +1089,11 @@ for d = 0, 1 do
 		drawtype = "nodebox",
 		tiles = {
 			top,
-			"jeija_microcontroller_bottom.png",
-			"jeija_microcontroller_sides.png",
-			"jeija_microcontroller_sides.png",
-			"jeija_microcontroller_sides.png",
-			"jeija_microcontroller_sides.png"
+			"mesecons_luacontroller_term_microcontroller_bottom.png",
+			"mesecons_luacontroller_term_microcontroller_sides.png",
+			"mesecons_luacontroller_term_microcontroller_sides.png",
+			"mesecons_luacontroller_term_microcontroller_sides.png",
+			"mesecons_luacontroller_term_microcontroller_sides.png"
 		},
 		inventory_image = top,
 		paramtype = "light",
@@ -1136,14 +1136,14 @@ end
 minetest.register_node(BASENAME .. "_burnt", {
 	drawtype = "nodebox",
 	tiles = {
-		"jeija_luacontroller_burnt_top.png",
-		"jeija_microcontroller_bottom.png",
-		"jeija_microcontroller_sides.png",
-		"jeija_microcontroller_sides.png",
-		"jeija_microcontroller_sides.png",
-		"jeija_microcontroller_sides.png"
+		"mesecons_luacontroller_term_luacontroller_burnt_top.png",
+		"mesecons_luacontroller_term_microcontroller_bottom.png",
+		"mesecons_luacontroller_term_microcontroller_sides.png",
+		"mesecons_luacontroller_term_microcontroller_sides.png",
+		"mesecons_luacontroller_term_microcontroller_sides.png",
+		"mesecons_luacontroller_term_microcontroller_sides.png"
 	},
-	inventory_image = "jeija_luacontroller_burnt_top.png",
+	inventory_image = "mesecons_luacontroller_term_luacontroller_burnt_top.png",
 	is_burnt = true,
 	paramtype = "light",
 	is_ground_content = false,
