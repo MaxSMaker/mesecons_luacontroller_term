@@ -483,7 +483,7 @@ else
 					if lightweight then
 						set_nodetimer_interrupt(pos,time,iid)
 					else
-						mesecon.queue:add_action(pos, "lc_interrupt", {luac_id, iid}, time, iid, 1)
+						mesecon.queue:add_action(pos, "mesecons_luacontroller_term_interrupt", {luac_id, iid}, time, iid, 1)
 					end
 				end
 				if warn then send_warning(warn) end
@@ -608,7 +608,7 @@ local function get_digiline_send(pos, itbl, send_warning)
 		table.insert(itbl, function ()
 			-- Runs outside of string metatable sandbox
 			local luac_id = minetest.get_meta(pos):get_int("luac_id")
-			mesecon.queue:add_action(pos, "lc_digiline_relay", {channel, luac_id, msg})
+			mesecon.queue:add_action(pos, "mesecons_luacontroller_term_digiline_relay", {channel, luac_id, msg})
 		end)
 		return true
 	end
@@ -892,14 +892,14 @@ end
 -- A.Queue callbacks --
 -----------------------
 
-mesecon.queue:add_function("lc_interrupt", function (pos, luac_id, iid)
+mesecon.queue:add_function("mesecons_luacontroller_term_interrupt", function (pos, luac_id, iid)
 	-- There is no luacontroller anymore / it has been reprogrammed / replaced / burnt
 	if (minetest.get_meta(pos):get_int("luac_id") ~= luac_id) then return end
 	if (minetest.registered_nodes[minetest.get_node(pos).name].is_burnt) then return end
 	run(pos, {type="interrupt", iid = iid})
 end)
 
-mesecon.queue:add_function("lc_digiline_relay", function (pos, channel, luac_id, msg)
+mesecon.queue:add_function("mesecons_luacontroller_term_digiline_relay", function (pos, channel, luac_id, msg)
 	if not digiline then return end
 	-- This check is only really necessary because in case of server crash, old actions can be thrown into the future
 	if (minetest.get_meta(pos):get_int("luac_id") ~= luac_id) then return end
