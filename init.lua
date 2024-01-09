@@ -29,7 +29,7 @@
 -- Something nice to play is is appending minetest.env to it.
 
 --Load the documentation manager, which provides examples and library information
-mesecon_luacontroller_term = {}
+mesecons_luacontroller_term = {}
 dofile(minetest.get_modpath("mesecons_luacontroller_term")..DIR_DELIM.."docmanager.lua")
 
 local BASENAME = "mesecons_luacontroller_term:luacontroller"
@@ -47,15 +47,15 @@ local rules = {
 -- Function signature is getlibrary(env, pos) where 'env' is the environment that the Luacontroller code is running in, and 'pos' is the position of the controller.
 -- Table (recommended for libraries containing mostly lookup tables): A table that will be copied, and the copy returned to the LuaC code.
 -- When using the table format, any functions in the table will have their environment changed to that of the Luacontroller.
-mesecon_luacontroller_term.libraries = {}
+mesecons_luacontroller_term.libraries = {}
 
 --This prepares the actual require() function that will be available in the LuaC environment.
 local function get_require(pos, env)
 	return function(name)
-		if type(mesecon_luacontroller_term.libraries[name]) == "function" then
-			return mesecon_luacontroller_term.libraries[name](env, pos)
-		elseif type(mesecon_luacontroller_term.libraries[name]) == "table" then
-			return mesecon.tablecopy_change_env(mesecon_luacontroller_term.libraries[name], env)
+		if type(mesecons_luacontroller_term.libraries[name]) == "function" then
+			return mesecons_luacontroller_term.libraries[name](env, pos)
+		elseif type(mesecons_luacontroller_term.libraries[name]) == "table" then
+			return mesecon.tablecopy_change_env(mesecons_luacontroller_term.libraries[name], env)
 		end
 	end
 end
@@ -263,10 +263,10 @@ local function update_formspec(pos)
 			.."field_close_on_enter[terminal_input;false]"
 	elseif tab == 3 then
 		--Help tab
-		fs = fs..mesecon_luacontroller_term.lc_docs.generate_help_formspec(meta:get_int("help_selidx"))
+		fs = fs..mesecons_luacontroller_term.lc_docs.generate_help_formspec(meta:get_int("help_selidx"))
 	elseif tab == 4 then
 		--Examples tab
-		fs = fs..mesecon_luacontroller_term.lc_docs.generate_example_formspec(meta:get_int("example_selidx"))
+		fs = fs..mesecons_luacontroller_term.lc_docs.generate_example_formspec(meta:get_int("example_selidx"))
 			.."image_button[6.25,10.25;2.5,1;"..run_img..";program_example;]"
 	end
 
@@ -1017,8 +1017,8 @@ local function on_receive_fields(pos, form_name, fields, sender)
 					return
 				end
 				local selidx = meta:get_int("example_selidx")
-				selidx = math.max(1,math.min(selidx,#mesecon_luacontroller_term.lc_docs.example_order))
-				local code = mesecon_luacontroller_term.lc_docs.examples[mesecon_luacontroller_term.lc_docs.example_order[selidx]]
+				selidx = math.max(1,math.min(selidx,#mesecons_luacontroller_term.lc_docs.example_order))
+				local code = mesecons_luacontroller_term.lc_docs.examples[mesecons_luacontroller_term.lc_docs.example_order[selidx]]
 				meta:set_string("terminal_text","")
 				meta:set_int("tab",1)
 				set_program(pos,code)

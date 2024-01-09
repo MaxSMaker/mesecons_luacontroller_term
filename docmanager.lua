@@ -1,24 +1,24 @@
-mesecon_luacontroller_term.lc_docs = {}
+mesecons_luacontroller_term.lc_docs = {}
 
 --Other mods can place their own examples in here.
 --The table key will be used as the name.
-mesecon_luacontroller_term.lc_docs.examples = {}
+mesecons_luacontroller_term.lc_docs.examples = {}
 
 minetest.register_on_mods_loaded(function()
 	--Build a list of example names so that the order will stay the same when the formspecs are redrawn
-	mesecon_luacontroller_term.lc_docs.example_order = {}
-	for k in pairs(mesecon_luacontroller_term.lc_docs.examples) do
-		table.insert(mesecon_luacontroller_term.lc_docs.example_order,k)
+	mesecons_luacontroller_term.lc_docs.example_order = {}
+	for k in pairs(mesecons_luacontroller_term.lc_docs.examples) do
+		table.insert(mesecons_luacontroller_term.lc_docs.example_order,k)
 	end
-	table.sort(mesecon_luacontroller_term.lc_docs.example_order)
+	table.sort(mesecons_luacontroller_term.lc_docs.example_order)
 end)
 
-function mesecon_luacontroller_term.lc_docs.generate_example_formspec(sel_index)
+function mesecons_luacontroller_term.lc_docs.generate_example_formspec(sel_index)
 	sel_index = math.max(sel_index,1)
-	sel_index = math.min(sel_index,#mesecon_luacontroller_term.lc_docs.example_order)
-	local selected_text = mesecon_luacontroller_term.lc_docs.examples[mesecon_luacontroller_term.lc_docs.example_order[sel_index]]
+	sel_index = math.min(sel_index,#mesecons_luacontroller_term.lc_docs.example_order)
+	local selected_text = mesecons_luacontroller_term.lc_docs.examples[mesecons_luacontroller_term.lc_docs.example_order[sel_index]]
 	local fs = "textlist[0.25,0.6;3,9.05;example_list;"
-	for _,i in ipairs(mesecon_luacontroller_term.lc_docs.example_order) do
+	for _,i in ipairs(mesecons_luacontroller_term.lc_docs.example_order) do
 		fs = fs..minetest.formspec_escape(i)..","
 	end
 	fs = string.sub(fs,1,-2)..";"..sel_index..";false]"
@@ -34,22 +34,22 @@ local included_examples = {
 
 for k,v in pairs(included_examples) do
 	local f = io.open(minetest.get_modpath("mesecons_luacontroller_term")..DIR_DELIM.."examples"..DIR_DELIM..v,"r")
-	mesecon_luacontroller_term.lc_docs.examples[k] = f:read("*all")
+	mesecons_luacontroller_term.lc_docs.examples[k] = f:read("*all")
 	f:close()
 end
 
 --Other mods can provide their own help pages too, but the order of these must be specified and is not automatically sorted.
 --In this table, the key is a number representing the position in the list, and the value is the description.
-mesecon_luacontroller_term.lc_docs.help_order = {}
+mesecons_luacontroller_term.lc_docs.help_order = {}
 --In this table, the key is the description and the value in the content.
-mesecon_luacontroller_term.lc_docs.help_pages = {}
+mesecons_luacontroller_term.lc_docs.help_pages = {}
 
-function mesecon_luacontroller_term.lc_docs.generate_help_formspec(sel_index)
+function mesecons_luacontroller_term.lc_docs.generate_help_formspec(sel_index)
 	sel_index = math.max(sel_index,1)
-	sel_index = math.min(sel_index,#mesecon_luacontroller_term.lc_docs.help_order)
-	local selected_text = mesecon_luacontroller_term.lc_docs.help_pages[mesecon_luacontroller_term.lc_docs.help_order[sel_index]]
+	sel_index = math.min(sel_index,#mesecons_luacontroller_term.lc_docs.help_order)
+	local selected_text = mesecons_luacontroller_term.lc_docs.help_pages[mesecons_luacontroller_term.lc_docs.help_order[sel_index]]
 	local fs = "textlist[0.25,0.6;3,9.05;help_list;"
-	for _,i in ipairs(mesecon_luacontroller_term.lc_docs.help_order) do
+	for _,i in ipairs(mesecons_luacontroller_term.lc_docs.help_order) do
 		fs = fs..minetest.formspec_escape(i)..","
 	end
 	fs = string.sub(fs,1,-2)..";"..sel_index..";false]"
@@ -80,7 +80,7 @@ local included_help_content = {
 for _,v in ipairs(included_help_order) do
 	local filename = included_help_content[v]
 	local f = io.open(minetest.get_modpath("mesecons_luacontroller_term")..DIR_DELIM.."help"..DIR_DELIM..filename,"r")
-	table.insert(mesecon_luacontroller_term.lc_docs.help_order,v)
-	mesecon_luacontroller_term.lc_docs.help_pages[v] = f:read("*all")
+	table.insert(mesecons_luacontroller_term.lc_docs.help_order,v)
+	mesecons_luacontroller_term.lc_docs.help_pages[v] = f:read("*all")
 	f:close()
 end
